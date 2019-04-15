@@ -1,0 +1,19 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "zendframework/zend-diactoros": "^1.8",
+        "aura/router": "^3.1",
+        "twig/twig": "^2.5",
+        "vlucas/phpdotenv": "^2.5",
+        "woohoolabs/harmony": "^6.0",
+        "zendframework/zend-httphandlerrunner": "^1.0",
+        "middlewares/aura-router": "^1.1",
+        "filp/whoops": "^2.3",
+        "franzl/whoops-middleware": "^1.0",
+        "monolog/monolog": "^1.24"
+    }
+}
