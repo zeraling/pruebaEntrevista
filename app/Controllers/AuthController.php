@@ -16,20 +16,18 @@ class AuthController extends BaseController {
         $postData = $request->getParsedBody();
         $responseMessage = null;
 
-        $user = Users::getUserByName($postData['email']);
+        $user = Users::getUserByName($postData['username']);
         
-        var_dump($user);
-        
-        die;
         if ($user) {
-            if (password_verify($postData['password'], $user->password)) {
-                $_SESSION['userId'] = $user->id;
-                return new RedirectResponse('/admin');
+            if ($postData['password']==$user->pass) {
+            //if (password_verify($postData['password'], $user->password)) {
+                $_SESSION['sisUser'] = $user->id;
+                return new RedirectResponse('/');
             } else {
-                $responseMessage = 'Bad credentials';
+                $responseMessage = 'Usuario o password invalidos';
             }
         } else {
-            $responseMessage = 'Bad credentials';
+            $responseMessage = 'No se encontro el usuario';
         }
 
         return $this->renderHTML('login.twig', [
@@ -38,7 +36,7 @@ class AuthController extends BaseController {
     }
 
     public function getLogout() {
-        unset($_SESSION['userId']);
+        unset($_SESSION['sisUser']);
         return new RedirectResponse('/login');
     }
 

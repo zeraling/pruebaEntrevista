@@ -1,69 +1,75 @@
 {% extends "layout.twig" %}
 
+{% block styles %}
+
+    <!-- datatable -->
+    <link type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+{% endblock %}
+
 {% block content %}
     <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Prueba</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/clientes">Clientes</a></li>
-                    <li><a href="/usuarios">Usuarios</a></li>
-                    <li><a href="/exit">Salir</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">User</li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-
+    {{ include('nav.twig') }}
     <!-- Main component for a primary marketing message or call to action -->
     <div class="row">
 
         <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">Lista de Clientes</div>
-
-            <!-- Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Codigo</th>
-                        <th>Nombre</th>
-                        <th>Ciudad</th>
-                        <th>Op</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {%if listaClientes %}
-                        {%for clientes in listaClientes %}
+            <div class="panel-body">
+                <div class="row">
+                    <a class="btn btn-default" href="/cliente/form">Agregar</a>
+                </div>
+                <hr>
+                <div class="row">
+                    <table id="listado" class="table table-hover">
+                        <thead>
                             <tr>
-                                <td class="text-center">
-                                    <span data="{{clientes.cod}}">{{clientes.cod}}</span>
-                                </td>
-                                <td>{{clientes.name}}</td>
-                                <td>{{clientes.city}}</td>
-                                <td>
-                                    <a class="btn btn-link" href="/clientes/form/{{clientes.cod}}">Editar</a>
-                                    <a class="btn btn-link" href="/clientes/del/{{clientes.cod}}">Eliminar</a>
-                                </td>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Ciudad</th>
+                                <th>Op</th>
                             </tr>
-                        {%endfor%}
-                    {%endif%}
-                    </tr>
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {%if listaClientes %}
+                                {%for clientes in listaClientes %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <span data="{{clientes.cod}}">{{clientes.cod}}</span>
+                                        </td>
+                                        <td>{{clientes.name}}</td>
+                                        <td>{{clientes.city}}</td>
+                                        <td>
+                                            <a class="btn btn-link" href="/cliente/form/{{clientes.cod}}">Editar</a>
+                                            <a class="btn btn-link" href="/cliente/delete/{{clientes.cod}}">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            {%endif%}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
 
     </div>
+
+{% endblock %}
+{% block scrips %}
+
+    <!-- datatable --> 
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <!-- Custom -->
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#listado').DataTable();
+        });
+
+
+    </script>
 
 {% endblock %}

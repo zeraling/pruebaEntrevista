@@ -26,11 +26,11 @@ class AuthenticationMiddleware implements MiddlewareInterface
     {
         $urlPath = $request->getUri()->getPath();
         
-        if (empty($_SESSION['sigUser'])) {
+        if (empty($_SESSION['sisUser'])) {
             if($urlPath!='/login'){
                 return new RedirectResponse('/login');
-            }  
-        } elseif (!empty($_SESSION['sigUser'])) {
+            }
+        } elseif (!empty($_SESSION['sisUser'])) {
             if($urlPath=='/login'){
                 return new RedirectResponse('/');
             } 

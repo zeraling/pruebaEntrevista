@@ -24,7 +24,12 @@ $map->get('index', '/', ['App\Controllers\IndexController', 'indexAction']);
 
 $map->get('login', '/login', ['App\Controllers\AuthController', 'getLogin']);
 $map->get('logout', '/exit', ['App\Controllers\AuthController', 'getLogout']);
-$map->post('auth', '/auth', ['App\Controllers\AuthController', 'postLogin']);
+$map->post('auth', '/login', ['App\Controllers\AuthController', 'postLogin']);
+
+$map->get('ciudades', '/getCiudades', ['App\Controllers\IndexController', 'getCiudades']);
+
+$map->get('add.clientes', '/cliente/form{/id}', ['App\Controllers\ClientsController', 'formAction']);
+$map->post('edit.clientes', '/cliente/form', ['App\Controllers\ClientsController', 'saveAction']);
 
 
 $matcher = $routerContainer->getMatcher();

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Twig_Loader_Filesystem;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 
 class BaseController {
 
@@ -15,10 +16,18 @@ class BaseController {
             'debug' => true,
             'cache' => false,
         ));
+        
+        $this->templateEngine->addFilter(new \Twig_SimpleFilter('baseUrl', function ($path) {
+            return HOST_APP . $path;
+        }));
     }
 
     public function renderHTML($fileName, $data = []) {
         return new HtmlResponse($this->templateEngine->render($fileName, $data));
+    }
+    
+    public function renderJson($data = []) {
+        return new JsonResponse($data);
     }
 
 }

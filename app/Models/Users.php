@@ -34,8 +34,8 @@ class Users {
             $resultados = $query->fetch(PDO::FETCH_OBJ);
             return $resultados;
         } catch (PDOException $exc) {
-            // si ocurre algun error se genera la excepcion y se crea un log
-            return null;
+            //echo $exc->getTraceAsString();
+            return false;
         }
     }
     
